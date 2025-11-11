@@ -6,11 +6,13 @@ from api.app.db.enums import RadiationDatabase, PVTechnology, MountingPlace, Tra
 class PVCalcRequest(BaseModel):
     """Request schema for grid-connected PV system calculations."""
     
+    # Required parameters
     lat: float = Field(..., ge=-90, le=90, description="Latitude in degrees")
     lon: float = Field(..., ge=-180, le=180, description="Longitude in degrees")
     peakpower: float = Field(..., gt=0, description="Nominal PV power in kW")
     loss: float = Field(..., ge=0, le=100, description="Sum of system losses in %")
     
+    # Database and technology
     raddatabase: Optional[RadiationDatabase] = Field(None, description="Radiation database")
     pvtechchoice: Optional[PVTechnology] = Field(None, description="PV technology")
     mountingplace: Optional[MountingPlace] = Field(None, description="Mounting type")
@@ -25,17 +27,17 @@ class PVCalcRequest(BaseModel):
     # Tracking system parameters
     inclined_axis: Optional[int] = Field(None, description="Single inclined axis tracking")
     inclined_optimum: Optional[int] = Field(None, description="Optimal inclined axis angle")
-    inclinedaxisangle: Optional[float] = Field(None, ge=0, le=90)
+    inclinedaxisangle: Optional[float] = Field(None, ge=0, le=90, description="Inclined axis angle")
     
     vertical_axis: Optional[int] = Field(None, description="Single vertical axis tracking")
     vertical_optimum: Optional[int] = Field(None, description="Optimal vertical axis angle")
-    verticalaxisangle: Optional[float] = Field(None, ge=0, le=90)
+    verticalaxisangle: Optional[float] = Field(None, ge=0, le=90, description="Vertical axis angle")
     
     twoaxis: Optional[int] = Field(None, description="Two axis tracking")
     
     # Horizon
-    usehorizon: Optional[int] = Field(None, description="Use horizon data")
-    userhorizon: Optional[str] = Field(None, description="Comma-separated horizon heights")
+    usehorizon: Optional[int] = Field(None, description="Use horizon data (1=yes, 0=no)")
+    userhorizon: Optional[str] = Field(None, description="Comma-separated horizon heights (36 values)")
     
     # Economic parameters
     pvprice: Optional[int] = Field(None, description="Calculate PV electricity price")
@@ -43,8 +45,13 @@ class PVCalcRequest(BaseModel):
     interest: Optional[float] = Field(None, description="Interest rate %/year")
     lifetime: Optional[int] = Field(None, ge=1, le=50, description="System lifetime in years")
     
-    startyear: Optional[int] = Field(None, ge=2005, le=2020)
-    endyear: Optional[int] = Field(None, ge=2005, le=2020)
+    # Time range
+    startyear: Optional[int] = Field(None, ge=2005, le=2020, description="Start year")
+    endyear: Optional[int] = Field(None, ge=2005, le=2020, description="End year")
+    
+    # Output format
+    outputformat: Optional[OutputFormat] = Field(None, description="Output format (json, csv, basic)")
+    # browser: Optional[int] = Field(None, description="Browser mode (0=no, 1=yes) - Commented out, set automatically")
     
     class Config:
         json_schema_extra = {
@@ -64,21 +71,33 @@ class PVCalcRequest(BaseModel):
 class SHSCalcRequest(BaseModel):
     """Request schema for off-grid (stand-alone) PV system calculations."""
     
-    lat: float = Field(..., ge=-90, le=90)
-    lon: float = Field(..., ge=-180, le=180)
+    # Required parameters
+    lat: float = Field(..., ge=-90, le=90, description="Latitude in degrees")
+    lon: float = Field(..., ge=-180, le=180, description="Longitude in degrees")
     peakpower: float = Field(..., gt=0, description="Nominal PV power in Watts")
     batterysize: float = Field(..., gt=0, description="Battery capacity in Wh")
     cutoff: float = Field(..., ge=0, le=100, description="Battery cutoff in %")
     consumptionday: float = Field(..., gt=0, description="Daily consumption in Wh")
     
-    angle: Optional[float] = Field(None, ge=0, le=90)
-    aspect: Optional[float] = Field(None, ge=-180, le=180)
+    # System configuration
+    angle: Optional[float] = Field(None, ge=0, le=90, description="Inclination angle")
+    aspect: Optional[float] = Field(None, ge=-180, le=180, description="Azimuth angle")
     
-    hourconsumption: Optional[str] = Field(None, description="Comma-separated 24 hourly fractions")
+    # Consumption pattern
+    hourconsumption: Optional[str] = Field(None, description="Comma-separated 24 hourly consumption fractions (sum must = 1)")
     
-    raddatabase: Optional[RadiationDatabase] = Field(None)
-    usehorizon: Optional[int] = Field(None)
-    userhorizon: Optional[str] = Field(None)
+    # Database and horizon
+    raddatabase: Optional[RadiationDatabase] = Field(None, description="Radiation database")
+    usehorizon: Optional[int] = Field(None, description="Use horizon data (1=yes, 0=no)")
+    userhorizon: Optional[str] = Field(None, description="Comma-separated horizon heights")
+    
+    # Time range
+    startyear: Optional[int] = Field(None, ge=2005, le=2020, description="Start year")
+    endyear: Optional[int] = Field(None, ge=2005, le=2020, description="End year")
+    
+    # Output format
+    outputformat: Optional[OutputFormat] = Field(None, description="Output format")
+    # browser: Optional[int] = Field(None, description="Browser mode - Commented out, set automatically")
     
     class Config:
         json_schema_extra = {
@@ -90,7 +109,11 @@ class SHSCalcRequest(BaseModel):
                 "cutoff": 40,
                 "consumptionday": 5000,
                 "angle": 35,
-                "aspect": 0
+                "aspect": 0,
+                "raddatabase": "PVGIS-SARAH",
+                "startyear": 2019,
+                "endyear": 2020,
+                "outputformat": "json"
             }
         }
 
@@ -98,32 +121,44 @@ class SHSCalcRequest(BaseModel):
 class MRCalcRequest(BaseModel):
     """Request schema for monthly radiation calculations."""
     
-    lat: float = Field(..., ge=-90, le=90)
-    lon: float = Field(..., ge=-180, le=180)
+    # Required parameters
+    lat: float = Field(..., ge=-90, le=90, description="Latitude in degrees")
+    lon: float = Field(..., ge=-180, le=180, description="Longitude in degrees")
     
-    raddatabase: Optional[RadiationDatabase] = Field(None)
-    startyear: Optional[int] = Field(None, ge=2005, le=2020)
-    endyear: Optional[int] = Field(None, ge=2005, le=2020)
+    # Database and time
+    raddatabase: Optional[RadiationDatabase] = Field(None, description="Radiation database")
+    startyear: Optional[int] = Field(None, ge=2005, le=2020, description="Start year")
+    endyear: Optional[int] = Field(None, ge=2005, le=2020, description="End year")
     
-    horirrad: Optional[int] = Field(None, description="Horizontal plane irradiation")
-    optrad: Optional[int] = Field(None, description="Optimal angle plane irradiation")
-    selectrad: Optional[int] = Field(None, description="Selected angle irradiation")
+    # Radiation output options
+    horirrad: Optional[int] = Field(None, description="Horizontal plane irradiation (1=yes)")
+    optrad: Optional[int] = Field(None, description="Optimal angle plane irradiation (1=yes)")
+    selectrad: Optional[int] = Field(None, description="Selected angle irradiation (1=yes)")
     angle: Optional[float] = Field(None, ge=0, le=90, description="Inclination for selectrad")
-    mr_dni: Optional[int] = Field(None, description="Direct normal irradiation")
-    d2g: Optional[int] = Field(None, description="Diffuse to global ratio")
-    avtemp: Optional[int] = Field(None, description="Average daily temperature")
+    mr_dni: Optional[int] = Field(None, description="Direct normal irradiation (1=yes)")
+    d2g: Optional[int] = Field(None, description="Diffuse to global ratio (1=yes)")
+    avtemp: Optional[int] = Field(None, description="Average daily temperature (1=yes)")
     
-    usehorizon: Optional[int] = Field(None)
-    userhorizon: Optional[str] = Field(None)
+    # Horizon
+    usehorizon: Optional[int] = Field(None, description="Use horizon data")
+    userhorizon: Optional[str] = Field(None, description="Comma-separated horizon heights")
+    
+    # Output format
+    outputformat: Optional[OutputFormat] = Field(None, description="Output format")
+    # browser: Optional[int] = Field(None, description="Browser mode - Commented out")
     
     class Config:
         json_schema_extra = {
             "example": {
                 "lat": 38.447,
                 "lon": 27.149,
+                "raddatabase": "PVGIS-SARAH",
                 "horirrad": 1,
-                "startyear": 2020,
-                "endyear": 2020
+                "optrad": 1,
+                "avtemp": 1,
+                "startyear": 2019,
+                "endyear": 2020,
+                "outputformat": "json"
             }
         }
 
@@ -131,23 +166,35 @@ class MRCalcRequest(BaseModel):
 class DRCalcRequest(BaseModel):
     """Request schema for daily radiation calculations."""
     
-    lat: float = Field(..., ge=-90, le=90)
-    lon: float = Field(..., ge=-180, le=180)
-    month: int = Field(..., ge=0, le=12, description="Month (0=all months)")
+    # Required parameters
+    lat: float = Field(..., ge=-90, le=90, description="Latitude in degrees")
+    lon: float = Field(..., ge=-180, le=180, description="Longitude in degrees")
+    month: int = Field(..., ge=0, le=12, description="Month (0=all months, 1-12=specific month)")
     
-    raddatabase: Optional[RadiationDatabase] = Field(None)
-    angle: Optional[float] = Field(None, ge=0, le=90)
-    aspect: Optional[float] = Field(None, ge=-180, le=180)
+    # Database and configuration
+    raddatabase: Optional[RadiationDatabase] = Field(None, description="Radiation database")
+    angle: Optional[float] = Field(None, ge=0, le=90, description="Inclination angle")
+    aspect: Optional[float] = Field(None, ge=-180, le=180, description="Azimuth angle")
     
-    global_: Optional[int] = Field(None, alias="global", description="Global, direct, diffuse")
-    glob_2axis: Optional[int] = Field(None, description="Two-axis tracking irradiances")
-    clearsky: Optional[int] = Field(None, description="Clear-sky irradiance")
-    clearsky_2axis: Optional[int] = Field(None, description="Clear-sky 2-axis tracking")
-    showtemperatures: Optional[int] = Field(None, description="Daily temperature profile")
-    localtime: Optional[int] = Field(None, description="Use local time instead of UTC")
+    # Output options
+    global_: Optional[int] = Field(None, alias="global", description="Global, direct, diffuse (1=yes)")
+    glob_2axis: Optional[int] = Field(None, description="Two-axis tracking irradiances (1=yes)")
+    clearsky: Optional[int] = Field(None, description="Clear-sky irradiance (1=yes)")
+    clearsky_2axis: Optional[int] = Field(None, description="Clear-sky 2-axis tracking (1=yes)")
+    showtemperatures: Optional[int] = Field(None, description="Daily temperature profile (1=yes)")
+    localtime: Optional[int] = Field(None, description="Use local time instead of UTC (1=yes)")
     
-    usehorizon: Optional[int] = Field(None)
-    userhorizon: Optional[str] = Field(None)
+    # Time range (optional for specific years)
+    startyear: Optional[int] = Field(None, ge=2005, le=2020, description="Start year")
+    endyear: Optional[int] = Field(None, ge=2005, le=2020, description="End year")
+    
+    # Horizon
+    usehorizon: Optional[int] = Field(None, description="Use horizon data")
+    userhorizon: Optional[str] = Field(None, description="Comma-separated horizon heights")
+    
+    # Output format
+    outputformat: Optional[OutputFormat] = Field(None, description="Output format")
+    # browser: Optional[int] = Field(None, description="Browser mode - Commented out")
     
     class Config:
         populate_by_name = True
@@ -156,8 +203,12 @@ class DRCalcRequest(BaseModel):
                 "lat": 38.447,
                 "lon": 27.149,
                 "month": 4,
+                "raddatabase": "PVGIS-SARAH",
                 "angle": 35,
-                "aspect": 0
+                "aspect": 0,
+                "global_": 1,
+                "showtemperatures": 1,
+                "outputformat": "json"
             }
         }
 
@@ -165,41 +216,56 @@ class DRCalcRequest(BaseModel):
 class SeriesCalcRequest(BaseModel):
     """Request schema for hourly radiation time series."""
     
-    lat: float = Field(..., ge=-90, le=90)
-    lon: float = Field(..., ge=-180, le=180)
+    # Required parameters
+    lat: float = Field(..., ge=-90, le=90, description="Latitude in degrees")
+    lon: float = Field(..., ge=-180, le=180, description="Longitude in degrees")
     
-    raddatabase: Optional[RadiationDatabase] = Field(None)
-    startyear: Optional[int] = Field(None, ge=2005, le=2020)
-    endyear: Optional[int] = Field(None, ge=2005, le=2020)
+    # Database and time range
+    raddatabase: Optional[RadiationDatabase] = Field(None, description="Radiation database")
+    startyear: Optional[int] = Field(None, ge=2005, le=2020, description="Start year")
+    endyear: Optional[int] = Field(None, ge=2005, le=2020, description="End year")
     
-    # PV calculation
-    pvcalculation: Optional[int] = Field(None, description="Include PV production estimation")
+    # PV calculation options
+    pvcalculation: Optional[int] = Field(None, description="Include PV production (1=yes, 0=no)")
     peakpower: Optional[float] = Field(None, description="Required if pvcalculation=1, in kW")
-    pvtechchoice: Optional[PVTechnology] = Field(None)
-    mountingplace: Optional[MountingPlace] = Field(None)
-    loss: Optional[float] = Field(None, description="Required if pvcalculation=1")
+    pvtechchoice: Optional[PVTechnology] = Field(None, description="PV technology")
+    mountingplace: Optional[MountingPlace] = Field(None, description="Mounting type")
+    loss: Optional[float] = Field(None, description="System losses % (required if pvcalculation=1)")
     
     # Mounting configuration
-    trackingtype: Optional[TrackingType] = Field(None)
-    angle: Optional[float] = Field(None, ge=0, le=90)
-    aspect: Optional[float] = Field(None, ge=-180, le=180)
-    optimalinclination: Optional[int] = Field(None)
-    optimalangles: Optional[int] = Field(None)
+    trackingtype: Optional[TrackingType] = Field(None, description="Tracking type (0=fixed, 1=horiz N-S, 2=two-axis, etc.)")
+    angle: Optional[float] = Field(None, ge=0, le=90, description="Inclination angle")
+    aspect: Optional[float] = Field(None, ge=-180, le=180, description="Azimuth angle")
+    optimalinclination: Optional[int] = Field(None, description="Calculate optimal inclination (1=yes)")
+    optimalangles: Optional[int] = Field(None, description="Calculate optimal angles (1=yes)")
     
-    components: Optional[int] = Field(None, description="Output beam, diffuse, reflected components")
+    # Output options
+    components: Optional[int] = Field(None, description="Output beam, diffuse, reflected components (1=yes)")
     
-    usehorizon: Optional[int] = Field(None)
-    userhorizon: Optional[str] = Field(None)
+    # Horizon
+    usehorizon: Optional[int] = Field(None, description="Use horizon data")
+    userhorizon: Optional[str] = Field(None, description="Comma-separated horizon heights")
+    
+    # Output format
+    outputformat: Optional[OutputFormat] = Field(None, description="Output format")
+    # browser: Optional[int] = Field(None, description="Browser mode - Commented out")
     
     class Config:
         json_schema_extra = {
             "example": {
                 "lat": 38.447,
                 "lon": 27.149,
+                "raddatabase": "PVGIS-SARAH",
                 "startyear": 2020,
                 "endyear": 2020,
+                "pvcalculation": 1,
+                "peakpower": 1.0,
+                "pvtechchoice": "crystSi",
+                "mountingplace": "free",
+                "loss": 14,
                 "angle": 35,
-                "aspect": 0
+                "aspect": 0,
+                "outputformat": "json"
             }
         }
 
@@ -207,23 +273,32 @@ class SeriesCalcRequest(BaseModel):
 class TMYRequest(BaseModel):
     """Request schema for Typical Meteorological Year data. WARNING: Requires minimum 10 years! Very slow (30-90 seconds)!"""
     
-    lat: float = Field(..., ge=-90, le=90)
-    lon: float = Field(..., ge=-180, le=180)
+    # Required parameters
+    lat: float = Field(..., ge=-90, le=90, description="Latitude in degrees")
+    lon: float = Field(..., ge=-180, le=180, description="Longitude in degrees")
     
-    raddatabase: Optional[RadiationDatabase] = Field(None)
-    startyear: Optional[int] = Field(None, ge=2005, le=2020)
-    endyear: Optional[int] = Field(None, ge=2005, le=2020, description="Must be >= startyear + 9 (minimum 10 years)")
+    # Database and time (minimum 10 years required)
+    raddatabase: Optional[RadiationDatabase] = Field(None, description="Radiation database")
+    startyear: Optional[int] = Field(None, ge=2005, le=2020, description="Start year")
+    endyear: Optional[int] = Field(None, ge=2005, le=2020, description="End year (must be >= startyear + 9)")
     
-    usehorizon: Optional[int] = Field(None)
-    userhorizon: Optional[str] = Field(None)
+    # Horizon
+    usehorizon: Optional[int] = Field(None, description="Use horizon data")
+    userhorizon: Optional[str] = Field(None, description="Comma-separated horizon heights")
+    
+    # Output format
+    outputformat: Optional[OutputFormat] = Field(None, description="Output format (json, csv, basic, epw)")
+    # browser: Optional[int] = Field(None, description="Browser mode - Commented out")
     
     class Config:
         json_schema_extra = {
             "example": {
                 "lat": 38.447,
                 "lon": 27.149,
+                "raddatabase": "PVGIS-SARAH2",
                 "startyear": 2010,
-                "endyear": 2020
+                "endyear": 2020,
+                "outputformat": "json"
             }
         }
 
@@ -231,16 +306,23 @@ class TMYRequest(BaseModel):
 class HorizonRequest(BaseModel):
     """Request schema for horizon profile data."""
     
-    lat: float = Field(..., ge=-90, le=90)
-    lon: float = Field(..., ge=-180, le=180)
+    # Required parameters
+    lat: float = Field(..., ge=-90, le=90, description="Latitude in degrees")
+    lon: float = Field(..., ge=-180, le=180, description="Longitude in degrees")
     
-    userhorizon: Optional[str] = Field(None, description="User-defined horizon heights")
+    # User-defined horizon (optional)
+    userhorizon: Optional[str] = Field(None, description="User-defined horizon heights (36 comma-separated values)")
+    
+    # Output format
+    outputformat: Optional[OutputFormat] = Field(None, description="Output format")
+    # browser: Optional[int] = Field(None, description="Browser mode - Commented out")
     
     class Config:
         json_schema_extra = {
             "example": {
                 "lat": 38.447,
-                "lon": 27.149
+                "lon": 27.149,
+                "outputformat": "json"
             }
         }
 

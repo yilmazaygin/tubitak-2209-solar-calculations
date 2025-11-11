@@ -4,7 +4,8 @@ from enum import Enum
 class RadiationDatabase(str, Enum):
     """Available radiation databases."""
     SARAH3 = "PVGIS-SARAH3"
-    SARAH = "PVGIS-SARAH"
+    SARAH2 = "PVGIS-SARAH2"  # Used by TMY endpoint
+    SARAH = "PVGIS-SARAH"    # Used by other endpoints
     NSRDB = "PVGIS-NSRDB"
     ERA5 = "PVGIS-ERA5"
 

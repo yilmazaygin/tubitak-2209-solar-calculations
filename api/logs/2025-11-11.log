@@ -574,3 +574,95 @@ RuntimeError: Error in TMY: HTTP error from PVGIS API: 400 Client Error: BAD REQ
 2025-11-11 23:47:26 [INFO] app_logger, pvgis.py:   - hourly: 8784 records
 2025-11-11 23:47:26 [WARNING] app_logger, response_utils.py: Truncated outputs.hourly from 8784 to 500 records for client compatibility
 2025-11-11 23:47:26 [INFO] app_logger, pvgis_router.py: Seriescalc completed successfully
+2025-11-11 23:51:37 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:51:37 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:52:21 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:52:21 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:52:23 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:52:23 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:52:25 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:52:25 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:52:27 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:52:27 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:52:29 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:52:29 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:52:44 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:52:44 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:53:26 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:53:26 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:53:37 [INFO] app_logger, pvgis_router.py: Horizon request for (38.447, 27.149)
+2025-11-11 23:53:37 [INFO] app_logger, pvgis.py: Requesting PVGIS printhorizon with params: {'lat': 38.447, 'lon': 27.149, 'outputformat': 'json', 'browser': '0'}
+2025-11-11 23:53:38 [INFO] app_logger, pvgis.py: PVGIS response status: 200, content-type: application/json
+2025-11-11 23:53:38 [INFO] app_logger, pvgis.py: PVGIS printhorizon response received successfully. Keys: ['inputs', 'outputs', 'meta']
+2025-11-11 23:53:38 [INFO] app_logger, pvgis.py: Response outputs keys: ['horizon_profile', 'winter_solstice', 'summer_solstice']
+2025-11-11 23:53:38 [INFO] app_logger, pvgis.py:   - horizon_profile: 49 records
+2025-11-11 23:53:38 [INFO] app_logger, pvgis.py:   - winter_solstice: 49 records
+2025-11-11 23:53:38 [INFO] app_logger, pvgis.py:   - summer_solstice: 49 records
+2025-11-11 23:53:38 [INFO] app_logger, pvgis_router.py: Horizon completed successfully
+2025-11-11 23:54:08 [INFO] app_logger, pvgis_router.py: PVcalc request for (38.447, 27.149), power=1.0kW
+2025-11-11 23:54:08 [INFO] app_logger, pvgis.py: Requesting PVGIS PVcalc with params: {'lat': 38.447, 'lon': 27.149, 'peakpower': 1.0, 'loss': 14.0, 'angle': 35.0, 'aspect': 0.0, 'startyear': 2020, 'endyear': 2020, 'outputformat': 'json', 'browser': '0'}
+2025-11-11 23:54:09 [INFO] app_logger, pvgis.py: PVGIS response status: 200, content-type: application/json
+2025-11-11 23:54:09 [INFO] app_logger, pvgis.py: PVGIS PVcalc response received successfully. Keys: ['inputs', 'outputs', 'meta']
+2025-11-11 23:54:09 [INFO] app_logger, pvgis.py: Response outputs keys: ['monthly', 'totals']
+2025-11-11 23:54:09 [INFO] app_logger, pvgis_router.py: PVcalc completed successfully
+2025-11-11 23:54:58 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:54:58 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:55:00 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:55:00 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:55:02 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:55:02 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:55:04 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:55:04 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:55:06 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:55:06 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:55:23 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:55:23 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:55:27 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:55:27 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:55:40 [INFO] app_logger, pvgis_router.py: TMY request for (38.447, 27.149), years=2010-2020
+2025-11-11 23:55:40 [INFO] app_logger, pvgis.py: Requesting PVGIS tmy with params: {'lat': 38.447, 'lon': 27.149, 'raddatabase': 'PVGIS-SARAH', 'startyear': 2010, 'endyear': 2020, 'outputformat': 'json', 'browser': '0'}
+2025-11-11 23:55:41 [INFO] app_logger, pvgis.py: PVGIS response status: 400, content-type: application/json
+2025-11-11 23:55:41 [ERROR] app_logger, pvgis_router.py: Runtime error in TMY: Error in TMY: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/tmy?lat=38.447&lon=27.149&raddatabase=PVGIS-SARAH&startyear=2010&endyear=2020&outputformat=json&browser=0
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 52, in _make_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\.venv\Lib\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/tmy?lat=38.447&lon=27.149&raddatabase=PVGIS-SARAH&startyear=2010&endyear=2020&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 186, in tmy
+    return PVGISService._make_request("tmy", params)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 94, in _make_request
+    raise RuntimeError(f"HTTP error from PVGIS API: {str(e)}") from e
+RuntimeError: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/tmy?lat=38.447&lon=27.149&raddatabase=PVGIS-SARAH&startyear=2010&endyear=2020&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\routers\pvgis_router.py", line 202, in typical_meteorological_year
+    result = PVGISService.tmy(request)
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 189, in tmy
+    raise RuntimeError(f"Error in TMY: {str(e)}") from e
+RuntimeError: Error in TMY: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/tmy?lat=38.447&lon=27.149&raddatabase=PVGIS-SARAH&startyear=2010&endyear=2020&outputformat=json&browser=0
+2025-11-11 23:57:04 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:57:04 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:57:06 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:57:06 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:57:21 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:57:21 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:57:37 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:57:37 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:57:44 [INFO] app_logger, pvgis_router.py: TMY request for (38.447, 27.149), years=2010-2020
+2025-11-11 23:57:44 [INFO] app_logger, pvgis.py: Requesting PVGIS tmy with params: {'lat': 38.447, 'lon': 27.149, 'raddatabase': 'PVGIS-SARAH2', 'startyear': 2010, 'endyear': 2020, 'outputformat': 'json', 'browser': '0'}
+2025-11-11 23:57:47 [INFO] app_logger, pvgis.py: PVGIS response status: 200, content-type: application/json
+2025-11-11 23:57:47 [INFO] app_logger, pvgis.py: PVGIS tmy response received successfully. Keys: ['inputs', 'outputs', 'meta']
+2025-11-11 23:57:47 [INFO] app_logger, pvgis.py: Response outputs keys: ['months_selected', 'tmy_hourly']
+2025-11-11 23:57:47 [INFO] app_logger, pvgis.py:   - months_selected: 12 records
+2025-11-11 23:57:47 [INFO] app_logger, pvgis.py:   - tmy_hourly: 8760 records
+2025-11-11 23:57:47 [WARNING] app_logger, response_utils.py: Truncated outputs.tmy_hourly from 8760 to 500 records for client compatibility
+2025-11-11 23:57:47 [INFO] app_logger, pvgis_router.py: TMY completed successfully
