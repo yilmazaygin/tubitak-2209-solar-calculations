@@ -1,4 +1,5 @@
 import math
+from ..core.logger import app_logger as logger
 
 
 class SolarPositionCalculator:
@@ -14,6 +15,8 @@ class SolarPositionCalculator:
             zenith_angle (degrees), earth_sun_distance (AU)
         """
         try:
+            logger.debug(f"Calculating solar position: JD={julian_date}, lon={longitude}, lat={latitude}")
+            
             dr = math.pi / 180.0
             T = (julian_date - 2451545.0) / 36525.0
 
@@ -51,15 +54,21 @@ class SolarPositionCalculator:
                                   math.cos(hour_angle * dr)) / dr
 
             zenith_angle = 90.0 - elevation
+            
+            logger.debug(f"Solar position calculated: zenith={zenith_angle:.2f}°, distance={R:.6f}AU")
+            
             return zenith_angle, R
 
         except OverflowError as e:
+            logger.error("Overflow error in solar position calculation")
             raise OverflowError(
                 f"Numeric overflow in solar position calculation. Error: {str(e)}"
             ) from e
         
         except (ValueError, ZeroDivisionError) as e:
+            logger.error(f"Mathematical error in solar position calculation: {str(e)}")
             raise RuntimeError(f"Mathematical error during solar position calculation: {str(e)}") from e
         
         except Exception as e:
+            logger.error(f"Unexpected error in solar position calculation: {str(e)}")
             raise RuntimeError(f"Unexpected error in solar position calculation: {str(e)}") from e

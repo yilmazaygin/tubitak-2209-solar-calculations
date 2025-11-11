@@ -10,8 +10,19 @@ router = APIRouter(prefix="/calculator", tags=["Calculator"])
 
 @router.post("/bird_model", response_model=SolarOutputsSchema)
 def bird_model(inputs: SolarInputsSchema) -> SolarOutputsSchema:
-    """Calculate solar outputs using the Bird model."""
-    logger.debug("Starting Bird model calculation")
+    """
+    Calculate solar irradiance using the Bird & Hulstrom (1981) Clear Sky Model.
+    
+    Calculates:
+    - Solar position (zenith angle, Earth-Sun distance)
+    - Atmospheric corrections (Rayleigh scattering, ozone, water vapor, aerosols)
+    - Direct, diffuse, and total horizontal irradiance
+    - Air mass and corrected solar constant
+    
+    The Bird model is a simplified clear sky model that provides accurate estimates
+    of solar irradiance under cloudless conditions.
+    """
+    logger.info(f"Bird model calculation for ({inputs.latitude}, {inputs.longitude}), {inputs.year}-{inputs.month:02d}-{inputs.day:02d}")
 
     try:
         outputs = BirdModel.calculate(inputs)
@@ -19,8 +30,7 @@ def bird_model(inputs: SolarInputsSchema) -> SolarOutputsSchema:
         # Sanity-check the result before constructing the response model
         if outputs is None:
             logger.error("BirdModel.calculate returned None for inputs: %s", inputs)
-            raise HTTPException(status_code=http_status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail="Model returned no result")
+            raise HTTPException(status_code=http_status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Model returned no result")
 
         # Log output fields at debug level (avoid printing to stdout)
         try:
@@ -48,5 +58,4 @@ def bird_model(inputs: SolarInputsSchema) -> SolarOutputsSchema:
 
     except Exception as e:
         logger.exception("Unexpected error in Bird model endpoint: %s", e)
-        raise HTTPException(status_code=http_status.HTTP_500_INTERNAL_SERVER_ERROR,
-                            detail="Internal server error while calculating Bird model")
+        raise HTTPException(status_code=http_status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error while calculating Bird model")
