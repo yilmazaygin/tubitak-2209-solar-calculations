@@ -1,0 +1,401 @@
+{
+  "pvcalc_basic": {
+    "description": "Basic grid-connected PV calculation for Izmir, Turkey",
+    "endpoint": "/pvgis/pvcalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "peakpower": 1.0,
+      "loss": 14.0,
+      "angle": 35,
+      "aspect": 0,
+      "startyear": 2020,
+      "endyear": 2020
+    }
+  },
+  
+  "pvcalc_optimal_angles": {
+    "description": "PV calculation with optimal angle calculation",
+    "endpoint": "/pvgis/pvcalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "peakpower": 5.0,
+      "loss": 14.0,
+      "optimalangles": 1,
+      "pvtechchoice": "crystSi",
+      "mountingplace": "free",
+      "startyear": 2019,
+      "endyear": 2020
+    }
+  },
+  
+  "pvcalc_tracking_single_axis": {
+    "description": "Single horizontal axis tracking system",
+    "endpoint": "/pvgis/pvcalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "peakpower": 10.0,
+      "loss": 14.0,
+      "fixed": 0,
+      "inclined_axis": 1,
+      "inclinedaxisangle": 30,
+      "startyear": 2020,
+      "endyear": 2020
+    }
+  },
+  
+  "pvcalc_tracking_two_axis": {
+    "description": "Two-axis tracking system for maximum energy",
+    "endpoint": "/pvgis/pvcalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "peakpower": 10.0,
+      "loss": 14.0,
+      "fixed": 0,
+      "twoaxis": 1,
+      "startyear": 2020,
+      "endyear": 2020
+    }
+  },
+  
+  "shscalc_basic": {
+    "description": "Off-grid stand-alone system with battery",
+    "endpoint": "/pvgis/shscalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "peakpower": 3000,
+      "batterysize": 10000,
+      "cutoff": 40,
+      "consumptionday": 5000,
+      "angle": 35,
+      "aspect": 0
+    }
+  },
+  
+  "shscalc_hourly_consumption": {
+    "description": "Off-grid system with hourly consumption profile",
+    "endpoint": "/pvgis/shscalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "peakpower": 5000,
+      "batterysize": 15000,
+      "cutoff": 30,
+      "consumptionday": 8000,
+      "angle": 35,
+      "aspect": 0,
+      "hourconsumption": "0.02,0.02,0.02,0.02,0.03,0.05,0.07,0.08,0.06,0.05,0.04,0.04,0.04,0.04,0.05,0.06,0.07,0.08,0.09,0.08,0.06,0.05,0.04,0.03"
+    }
+  },
+  
+  "mrcalc_horizontal": {
+    "description": "Monthly radiation on horizontal plane",
+    "endpoint": "/pvgis/mrcalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "horirrad": 1,
+      "startyear": 2015,
+      "endyear": 2020
+    }
+  },
+  
+  "mrcalc_optimal": {
+    "description": "Monthly radiation at optimal angle",
+    "endpoint": "/pvgis/mrcalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "optrad": 1,
+      "avtemp": 1,
+      "startyear": 2015,
+      "endyear": 2020
+    }
+  },
+  
+  "mrcalc_selected_angle": {
+    "description": "Monthly radiation at selected angle with DNI",
+    "endpoint": "/pvgis/mrcalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "selectrad": 1,
+      "angle": 35,
+      "mr_dni": 1,
+      "d2g": 1,
+      "startyear": 2015,
+      "endyear": 2020
+    }
+  },
+  
+  "drcalc_single_month": {
+    "description": "Daily radiation profile for April",
+    "endpoint": "/pvgis/drcalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "month": 4,
+      "angle": 35,
+      "aspect": 0,
+      "global": 1
+    }
+  },
+  
+  "drcalc_all_months": {
+    "description": "Daily radiation profiles for all 12 months",
+    "endpoint": "/pvgis/drcalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "month": 0,
+      "angle": 35,
+      "aspect": 0,
+      "global": 1,
+      "showtemperatures": 1
+    }
+  },
+  
+  "drcalc_tracking": {
+    "description": "Daily radiation with two-axis tracking",
+    "endpoint": "/pvgis/drcalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "month": 6,
+      "glob_2axis": 1,
+      "clearsky": 1,
+      "clearsky_2axis": 1
+    }
+  },
+  
+  "seriescalc_radiation_only": {
+    "description": "Hourly radiation time series (no PV calculation)",
+    "endpoint": "/pvgis/seriescalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "startyear": 2019,
+      "endyear": 2020,
+      "angle": 35,
+      "aspect": 0,
+      "pvcalculation": 0
+    }
+  },
+  
+  "seriescalc_with_pv": {
+    "description": "Hourly time series with PV power estimation",
+    "endpoint": "/pvgis/seriescalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "startyear": 2020,
+      "endyear": 2020,
+      "pvcalculation": 1,
+      "peakpower": 1.0,
+      "loss": 14.0,
+      "angle": 35,
+      "aspect": 0,
+      "pvtechchoice": "crystSi",
+      "mountingplace": "free"
+    }
+  },
+  
+  "seriescalc_components": {
+    "description": "Time series with beam, diffuse, and reflected components",
+    "endpoint": "/pvgis/seriescalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "startyear": 2020,
+      "endyear": 2020,
+      "angle": 35,
+      "aspect": 0,
+      "components": 1
+    }
+  },
+  
+  "seriescalc_tracking": {
+    "description": "Time series with two-axis tracking",
+    "endpoint": "/pvgis/seriescalc",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "startyear": 2020,
+      "endyear": 2020,
+      "pvcalculation": 1,
+      "peakpower": 5.0,
+      "loss": 14.0,
+      "trackingtype": 2,
+      "pvtechchoice": "crystSi"
+    }
+  },
+  
+  "tmy_basic": {
+    "description": "Typical Meteorological Year data",
+    "endpoint": "/pvgis/tmy",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "startyear": 2005,
+      "endyear": 2020,
+      "outputformat": "json"
+    }
+  },
+  
+  "tmy_with_database": {
+    "description": "TMY data with specific radiation database",
+    "endpoint": "/pvgis/tmy",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "raddatabase": "PVGIS-SARAH3",
+      "startyear": 2010,
+      "endyear": 2020
+    }
+  },
+  
+  "horizon_basic": {
+    "description": "Get horizon profile for location",
+    "endpoint": "/pvgis/horizon",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149
+    }
+  },
+  
+  "horizon_user_defined": {
+    "description": "Validate user-defined horizon data",
+    "endpoint": "/pvgis/horizon",
+    "request": {
+      "lat": 38.447,
+      "lon": 27.149,
+      "userhorizon": "0,5,10,15,20,15,10,5,0,5,10,15,20,25,30,25,20,15,10,5,0,5,10,15,20,15,10,5,0,5,10,15,20,15,10,5"
+    }
+  },
+  
+  "day_average_april15": {
+    "description": "Average solar data for April 15 across multiple years",
+    "endpoint": "/pvgis/day-average",
+    "request": {
+      "latitude": 38.447,
+      "longitude": 27.149,
+      "month": 4,
+      "day": 15,
+      "start_year": 2005,
+      "end_year": 2020,
+      "slope": 90,
+      "azimuth": 0
+    }
+  },
+  
+  "day_average_summer_solstice": {
+    "description": "Summer solstice (June 21) solar data",
+    "endpoint": "/pvgis/day-average",
+    "request": {
+      "latitude": 38.447,
+      "longitude": 27.149,
+      "month": 6,
+      "day": 21,
+      "start_year": 2010,
+      "end_year": 2020,
+      "slope": 35,
+      "azimuth": 0
+    }
+  },
+  
+  "day_average_winter_solstice": {
+    "description": "Winter solstice (December 21) solar data",
+    "endpoint": "/pvgis/day-average",
+    "request": {
+      "latitude": 38.447,
+      "longitude": 27.149,
+      "month": 12,
+      "day": 21,
+      "start_year": 2010,
+      "end_year": 2020,
+      "slope": 55,
+      "azimuth": 0
+    }
+  },
+  
+  "additional_locations": {
+    "ankara": {
+      "lat": 39.9334,
+      "lon": 32.8597,
+      "description": "Ankara, Turkey"
+    },
+    "istanbul": {
+      "lat": 41.0082,
+      "lon": 28.9784,
+      "description": "Istanbul, Turkey"
+    },
+    "antalya": {
+      "lat": 36.8969,
+      "lon": 30.7133,
+      "description": "Antalya, Turkey"
+    },
+    "berlin": {
+      "lat": 52.52,
+      "lon": 13.405,
+      "description": "Berlin, Germany"
+    },
+    "madrid": {
+      "lat": 40.4168,
+      "lon": -3.7038,
+      "description": "Madrid, Spain"
+    }
+  },
+  
+  "notes": {
+    "general": [
+      "All coordinates use decimal degrees",
+      "Latitude: -90 to 90 (negative = South, positive = North)",
+      "Longitude: -180 to 180 (negative = West, positive = East)",
+      "Angle (slope): 0-90 degrees (0 = horizontal, 90 = vertical)",
+      "Aspect (azimuth): -180 to 180 (0 = South, 90 = West, -90 = East)"
+    ],
+    "performance": [
+      "⚠️ TMY endpoint: Very slow! 10-15 years of data can take 30-90 seconds",
+      "⚠️ SeriesCalc with multi-year: Large responses, 10-30 seconds",
+      "✅ Single year requests (2020-2020): Fast, 1-5 seconds",
+      "✅ PVCalc, MRCalc, DRCalc: Usually fast, < 10 seconds",
+      "For testing in Swagger UI, use single year ranges to avoid freezing"
+    ],
+    "databases": [
+      "PVGIS-SARAH3: Satellite data for Europe, Africa, Middle East, parts of Asia/America",
+      "PVGIS-SARAH: Older satellite data",
+      "PVGIS-NSRDB: Americas",
+      "PVGIS-ERA5: Global reanalysis data"
+    ],
+    "pv_technologies": [
+      "crystSi: Crystalline silicon (most common)",
+      "CIS: Copper indium selenide",
+      "CdTe: Cadmium telluride",
+      "Unknown: Generic"
+    ],
+    "mounting_types": [
+      "free: Free-standing, well-ventilated",
+      "building: Building-integrated (higher temperatures)"
+    ],
+    "tracking_types": [
+      "0: Fixed (no tracking)",
+      "1: Horizontal N-S axis",
+      "2: Two-axis tracking",
+      "3: Vertical axis",
+      "4: Horizontal E-W axis",
+      "5: Inclined N-S axis"
+    ],
+    "tips": [
+      "Use shorter year ranges for faster responses",
+      "Single year (e.g., 2020-2020) is good for testing",
+      "Multi-year data (2005-2020) gives better averages",
+      "TMY requires minimum 10-year period",
+      "Use valid coordinates within PVGIS coverage area",
+      "Don't use userhorizon unless you have actual horizon data"
+    ]
+  }
+}

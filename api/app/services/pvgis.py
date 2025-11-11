@@ -76,7 +76,7 @@ class PVGISService:
         Supports fixed, single-axis, and two-axis tracking configurations.
         """
         try:
-            params = request.model_dump(by_alias=True, exclude_none=True)
+            params = request.model_dump(by_alias=True, exclude_none=True, mode='json')
             return PVGISService._make_request("PVcalc", params)
             
         except Exception as e:
@@ -89,7 +89,7 @@ class PVGISService:
         Calculate performance of off-grid (stand-alone) PV systems with battery storage.
         """
         try:
-            params = request.model_dump(by_alias=True, exclude_none=True)
+            params = request.model_dump(by_alias=True, exclude_none=True, mode='json')
             return PVGISService._make_request("SHScalc", params)
             
         except Exception as e:
@@ -103,7 +103,7 @@ class PVGISService:
         Can output horizontal, optimal angle, or selected angle irradiation.
         """
         try:
-            params = request.model_dump(by_alias=True, exclude_none=True)
+            params = request.model_dump(by_alias=True, exclude_none=True, mode='json')
             return PVGISService._make_request("MRcalc", params)
             
         except Exception as e:
@@ -117,7 +117,7 @@ class PVGISService:
         Set month=0 to get all 12 months.
         """
         try:
-            params = request.model_dump(by_alias=True, exclude_none=True)
+            params = request.model_dump(by_alias=True, exclude_none=True, mode='json')
             # Handle 'global' field properly
             if 'global' in params:
                 params['global'] = params.pop('global')
@@ -134,7 +134,7 @@ class PVGISService:
         Optionally includes PV power production estimates.
         """
         try:
-            params = request.model_dump(by_alias=True, exclude_none=True)
+            params = request.model_dump(by_alias=True, exclude_none=True, mode='json')
             return PVGISService._make_request("seriescalc", params)
             
         except Exception as e:
@@ -148,7 +148,7 @@ class PVGISService:
         Useful for energy simulation software like EnergyPlus.
         """
         try:
-            params = request.model_dump(by_alias=True, exclude_none=True)
+            params = request.model_dump(by_alias=True, exclude_none=True, mode='json')
             return PVGISService._make_request("tmy", params)
             
         except Exception as e:
@@ -162,7 +162,7 @@ class PVGISService:
         Returns height of horizon at different directions.
         """
         try:
-            params = request.model_dump(by_alias=True, exclude_none=True)
+            params = request.model_dump(by_alias=True, exclude_none=True, mode='json')
             return PVGISService._make_request("printhorizon", params)
             
         except Exception as e:

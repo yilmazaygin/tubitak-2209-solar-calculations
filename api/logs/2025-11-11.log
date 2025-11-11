@@ -1,0 +1,269 @@
+2025-11-11 23:08:22 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:08:22 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:10:26 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:10:26 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:10:46 [INFO] app_logger, pvgis_plus_router.py: Calculating day average for 04/15 at (38.447, 27.149)
+2025-11-11 23:10:46 [INFO] app_logger, pvgis.py: Fetching PVGIS data for lat=38.447, lon=27.149
+2025-11-11 23:10:46 [INFO] app_logger, pvgis.py: Requesting PVGIS seriescalc with params: {'lat': 38.447, 'lon': 27.149, 'startyear': 2005, 'endyear': 2020, 'angle': 90, 'aspect': 0, 'outputformat': 'json', 'browser': '0'}
+2025-11-11 23:11:02 [INFO] app_logger, pvgis.py: Successfully fetched 140256 hourly records
+2025-11-11 23:11:02 [INFO] app_logger, pvgis_plus.py: Filtering data for month=4, day=15
+2025-11-11 23:11:02 [INFO] app_logger, pvgis_plus.py: Found data for 16 years: [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
+2025-11-11 23:11:02 [INFO] app_logger, pvgis_plus.py: Calculated averages: peak at hour 10 with 499.75 W/m², daily total: 3577.55 Wh/m²
+2025-11-11 23:11:02 [INFO] app_logger, pvgis_plus_router.py: Successfully calculated averages for 16 years. Peak: 499.75 W/m² at hour 10
+2025-11-11 23:12:55 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:12:55 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:13:13 [INFO] app_logger, pvgis_router.py: PVcalc request for (-90.0, -180.0), power=1.0kW
+2025-11-11 23:13:13 [INFO] app_logger, pvgis.py: Requesting PVGIS PVcalc with params: {'lat': -90.0, 'lon': -180.0, 'peakpower': 1.0, 'loss': 100.0, 'raddatabase': <RadiationDatabase.SARAH3: 'PVGIS-SARAH3'>, 'pvtechchoice': <PVTechnology.CRYSTSI: 'crystSi'>, 'mountingplace': <MountingPlace.FREE: 'free'>, 'fixed': 1, 'angle': 0.0, 'aspect': 0.0, 'optimalinclination': 0, 'optimalangles': 0, 'inclined_axis': 0, 'inclined_optimum': 0, 'inclinedaxisangle': 0.0, 'vertical_axis': 0, 'vertical_optimum': 0, 'verticalaxisangle': 0.0, 'twoaxis': 0, 'usehorizon': 1, 'userhorizon': 'string', 'pvprice': 0, 'systemcost': 0.0, 'interest': 0.0, 'lifetime': 25, 'startyear': 2005, 'endyear': 2005, 'outputformat': <OutputFormat.JSON: 'json'>, 'browser': 0}
+2025-11-11 23:13:14 [ERROR] app_logger, pvgis_router.py: Runtime error in PVcalc: Error in PVcalc: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?lat=-90.0&lon=-180.0&peakpower=1.0&loss=100.0&raddatabase=PVGIS-SARAH3&pvtechchoice=crystSi&mountingplace=free&fixed=1&angle=0.0&aspect=0.0&optimalinclination=0&optimalangles=0&inclined_axis=0&inclined_optimum=0&inclinedaxisangle=0.0&vertical_axis=0&vertical_optimum=0&verticalaxisangle=0.0&twoaxis=0&usehorizon=1&userhorizon=string&pvprice=0&systemcost=0.0&interest=0.0&lifetime=25&startyear=2005&endyear=2005&outputformat=json&browser=0
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 41, in _make_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\.venv\Lib\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?lat=-90.0&lon=-180.0&peakpower=1.0&loss=100.0&raddatabase=PVGIS-SARAH3&pvtechchoice=crystSi&mountingplace=free&fixed=1&angle=0.0&aspect=0.0&optimalinclination=0&optimalangles=0&inclined_axis=0&inclined_optimum=0&inclinedaxisangle=0.0&vertical_axis=0&vertical_optimum=0&verticalaxisangle=0.0&twoaxis=0&usehorizon=1&userhorizon=string&pvprice=0&systemcost=0.0&interest=0.0&lifetime=25&startyear=2005&endyear=2005&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 80, in pvcalc
+    return PVGISService._make_request("PVcalc", params)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 60, in _make_request
+    raise RuntimeError(f"HTTP error from PVGIS API: {str(e)}") from e
+RuntimeError: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?lat=-90.0&lon=-180.0&peakpower=1.0&loss=100.0&raddatabase=PVGIS-SARAH3&pvtechchoice=crystSi&mountingplace=free&fixed=1&angle=0.0&aspect=0.0&optimalinclination=0&optimalangles=0&inclined_axis=0&inclined_optimum=0&inclinedaxisangle=0.0&vertical_axis=0&vertical_optimum=0&verticalaxisangle=0.0&twoaxis=0&usehorizon=1&userhorizon=string&pvprice=0&systemcost=0.0&interest=0.0&lifetime=25&startyear=2005&endyear=2005&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\routers\pvgis_router.py", line 29, in pv_calculator
+    result = PVGISService.pvcalc(request)
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 83, in pvcalc
+    raise RuntimeError(f"Error in PVcalc: {str(e)}") from e
+RuntimeError: Error in PVcalc: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?lat=-90.0&lon=-180.0&peakpower=1.0&loss=100.0&raddatabase=PVGIS-SARAH3&pvtechchoice=crystSi&mountingplace=free&fixed=1&angle=0.0&aspect=0.0&optimalinclination=0&optimalangles=0&inclined_axis=0&inclined_optimum=0&inclinedaxisangle=0.0&vertical_axis=0&vertical_optimum=0&verticalaxisangle=0.0&twoaxis=0&usehorizon=1&userhorizon=string&pvprice=0&systemcost=0.0&interest=0.0&lifetime=25&startyear=2005&endyear=2005&outputformat=json&browser=0
+2025-11-11 23:13:37 [INFO] app_logger, pvgis_router.py: MRcalc request for (-90.0, -180.0)
+2025-11-11 23:13:37 [INFO] app_logger, pvgis.py: Requesting PVGIS MRcalc with params: {'lat': -90.0, 'lon': -180.0, 'raddatabase': <RadiationDatabase.SARAH3: 'PVGIS-SARAH3'>, 'startyear': 2005, 'endyear': 2005, 'horirrad': 0, 'optrad': 0, 'selectrad': 0, 'angle': 0.0, 'mr_dni': 0, 'd2g': 0, 'avtemp': 0, 'usehorizon': 1, 'userhorizon': 'string', 'outputformat': <OutputFormat.JSON: 'json'>, 'browser': 0}
+2025-11-11 23:13:38 [ERROR] app_logger, pvgis_router.py: Runtime error in MRcalc: Error in MRcalc: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/MRcalc?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&horirrad=0&optrad=0&selectrad=0&angle=0.0&mr_dni=0&d2g=0&avtemp=0&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 41, in _make_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\.venv\Lib\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/MRcalc?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&horirrad=0&optrad=0&selectrad=0&angle=0.0&mr_dni=0&d2g=0&avtemp=0&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 107, in mrcalc
+    return PVGISService._make_request("MRcalc", params)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 60, in _make_request
+    raise RuntimeError(f"HTTP error from PVGIS API: {str(e)}") from e
+RuntimeError: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/MRcalc?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&horirrad=0&optrad=0&selectrad=0&angle=0.0&mr_dni=0&d2g=0&avtemp=0&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\routers\pvgis_router.py", line 97, in monthly_radiation
+    result = PVGISService.mrcalc(request)
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 110, in mrcalc
+    raise RuntimeError(f"Error in MRcalc: {str(e)}") from e
+RuntimeError: Error in MRcalc: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/MRcalc?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&horirrad=0&optrad=0&selectrad=0&angle=0.0&mr_dni=0&d2g=0&avtemp=0&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+2025-11-11 23:13:53 [INFO] app_logger, pvgis_router.py: Seriescalc request for (-90.0, -180.0), years=2005-2005
+2025-11-11 23:13:53 [INFO] app_logger, pvgis.py: Requesting PVGIS seriescalc with params: {'lat': -90.0, 'lon': -180.0, 'raddatabase': <RadiationDatabase.SARAH3: 'PVGIS-SARAH3'>, 'startyear': 2005, 'endyear': 2005, 'pvcalculation': 0, 'peakpower': 0.0, 'pvtechchoice': <PVTechnology.CRYSTSI: 'crystSi'>, 'mountingplace': <MountingPlace.FREE: 'free'>, 'loss': 0.0, 'trackingtype': <TrackingType.FIXED: 0>, 'angle': 0.0, 'aspect': 0.0, 'optimalinclination': 0, 'optimalangles': 0, 'components': 0, 'usehorizon': 1, 'userhorizon': 'string', 'outputformat': <OutputFormat.JSON: 'json'>, 'browser': 0}
+2025-11-11 23:13:54 [ERROR] app_logger, pvgis_router.py: Runtime error in Seriescalc: Error in seriescalc: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/seriescalc?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&pvcalculation=0&peakpower=0.0&pvtechchoice=crystSi&mountingplace=free&loss=0.0&trackingtype=TrackingType.FIXED&angle=0.0&aspect=0.0&optimalinclination=0&optimalangles=0&components=0&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 41, in _make_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\.venv\Lib\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/seriescalc?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&pvcalculation=0&peakpower=0.0&pvtechchoice=crystSi&mountingplace=free&loss=0.0&trackingtype=TrackingType.FIXED&angle=0.0&aspect=0.0&optimalinclination=0&optimalangles=0&components=0&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 138, in seriescalc
+    return PVGISService._make_request("seriescalc", params)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 60, in _make_request
+    raise RuntimeError(f"HTTP error from PVGIS API: {str(e)}") from e
+RuntimeError: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/seriescalc?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&pvcalculation=0&peakpower=0.0&pvtechchoice=crystSi&mountingplace=free&loss=0.0&trackingtype=TrackingType.FIXED&angle=0.0&aspect=0.0&optimalinclination=0&optimalangles=0&components=0&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\routers\pvgis_router.py", line 167, in hourly_time_series
+    result = PVGISService.seriescalc(request)
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 141, in seriescalc
+    raise RuntimeError(f"Error in seriescalc: {str(e)}") from e
+RuntimeError: Error in seriescalc: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/seriescalc?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&pvcalculation=0&peakpower=0.0&pvtechchoice=crystSi&mountingplace=free&loss=0.0&trackingtype=TrackingType.FIXED&angle=0.0&aspect=0.0&optimalinclination=0&optimalangles=0&components=0&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+2025-11-11 23:14:18 [INFO] app_logger, pvgis_router.py: Horizon request for (-90.0, -180.0)
+2025-11-11 23:14:18 [INFO] app_logger, pvgis.py: Requesting PVGIS printhorizon with params: {'lat': -90.0, 'lon': -180.0, 'userhorizon': 'string', 'outputformat': <OutputFormat.JSON: 'json'>, 'browser': 0}
+2025-11-11 23:14:19 [ERROR] app_logger, pvgis_router.py: Runtime error in Horizon: Error in printhorizon: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 41, in _make_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\.venv\Lib\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 166, in printhorizon
+    return PVGISService._make_request("printhorizon", params)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 60, in _make_request
+    raise RuntimeError(f"HTTP error from PVGIS API: {str(e)}") from e
+RuntimeError: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\routers\pvgis_router.py", line 237, in horizon_profile
+    result = PVGISService.printhorizon(request)
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 169, in printhorizon
+    raise RuntimeError(f"Error in printhorizon: {str(e)}") from e
+RuntimeError: Error in printhorizon: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+2025-11-11 23:15:06 [INFO] app_logger, pvgis_plus_router.py: Calculating day average for 04/15 at (38.447, 27.149)
+2025-11-11 23:15:06 [INFO] app_logger, pvgis.py: Fetching PVGIS data for lat=38.447, lon=27.149
+2025-11-11 23:15:06 [INFO] app_logger, pvgis.py: Requesting PVGIS seriescalc with params: {'lat': 38.447, 'lon': 27.149, 'startyear': 2005, 'endyear': 2020, 'angle': 90, 'aspect': 0, 'outputformat': 'json', 'browser': '0'}
+2025-11-11 23:15:18 [INFO] app_logger, pvgis.py: Successfully fetched 140256 hourly records
+2025-11-11 23:15:18 [INFO] app_logger, pvgis_plus.py: Filtering data for month=4, day=15
+2025-11-11 23:15:18 [INFO] app_logger, pvgis_plus.py: Found data for 16 years: [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
+2025-11-11 23:15:18 [INFO] app_logger, pvgis_plus.py: Calculated averages: peak at hour 10 with 499.75 W/m², daily total: 3577.55 Wh/m²
+2025-11-11 23:15:18 [INFO] app_logger, pvgis_plus_router.py: Successfully calculated averages for 16 years. Peak: 499.75 W/m² at hour 10
+2025-11-11 23:15:19 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:15:19 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:15:20 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:15:20 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:15:22 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:15:22 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:15:24 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:15:24 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:15:46 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:15:47 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:16:02 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:16:02 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:17:58 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:17:58 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:18:27 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:18:27 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:19:11 [INFO] app_logger, pvgis_router.py: PVcalc request for (38.447, 27.149), power=10.0kW
+2025-11-11 23:19:11 [INFO] app_logger, pvgis.py: Requesting PVGIS PVcalc with params: {'lat': 38.447, 'lon': 27.149, 'peakpower': 10.0, 'loss': 14.0, 'pvtechchoice': 'crystSi', 'mountingplace': 'free', 'fixed': 0, 'angle': 0.0, 'aspect': 0.0, 'optimalinclination': 0, 'optimalangles': 0, 'inclined_axis': 1, 'inclined_optimum': 0, 'inclinedaxisangle': 30.0, 'vertical_axis': 0, 'vertical_optimum': 0, 'verticalaxisangle': 0.0, 'twoaxis': 0, 'usehorizon': 1, 'pvprice': 0, 'lifetime': 25, 'startyear': 2020, 'endyear': 2020, 'outputformat': 'json', 'browser': 0}
+2025-11-11 23:19:13 [INFO] app_logger, pvgis_router.py: PVcalc completed successfully
+2025-11-11 23:21:56 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:21:56 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:22:11 [INFO] app_logger, pvgis_router.py: Seriescalc request for (38.447, 27.149), years=2020-2020
+2025-11-11 23:22:11 [INFO] app_logger, pvgis.py: Requesting PVGIS seriescalc with params: {'lat': 38.447, 'lon': 27.149, 'startyear': 2020, 'endyear': 2020, 'pvcalculation': 1, 'peakpower': 5.0, 'pvtechchoice': 'crystSi', 'mountingplace': 'free', 'loss': 14.0, 'trackingtype': 2, 'angle': 0.0, 'aspect': 0.0, 'optimalinclination': 0, 'optimalangles': 0, 'components': 0, 'usehorizon': 1, 'outputformat': 'json', 'browser': 0}
+2025-11-11 23:22:14 [INFO] app_logger, pvgis_router.py: Seriescalc completed successfully
+2025-11-11 23:22:55 [INFO] app_logger, pvgis_router.py: TMY request for (38.447, 27.149), years=2005-2020
+2025-11-11 23:22:55 [INFO] app_logger, pvgis.py: Requesting PVGIS tmy with params: {'lat': 38.447, 'lon': 27.149, 'startyear': 2005, 'endyear': 2020, 'usehorizon': 1, 'outputformat': 'json', 'browser': 0}
+2025-11-11 23:22:57 [INFO] app_logger, pvgis_router.py: TMY completed successfully
+2025-11-11 23:23:49 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:23:49 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:23:56 [INFO] app_logger, pvgis_router.py: TMY request for (-90.0, -180.0), years=2005-2005
+2025-11-11 23:23:56 [INFO] app_logger, pvgis.py: Requesting PVGIS tmy with params: {'lat': -90.0, 'lon': -180.0, 'raddatabase': 'PVGIS-SARAH3', 'startyear': 2005, 'endyear': 2005, 'usehorizon': 1, 'userhorizon': 'string', 'outputformat': 'json', 'browser': 0}
+2025-11-11 23:23:56 [ERROR] app_logger, pvgis_router.py: Runtime error in TMY: Error in TMY: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/tmy?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 41, in _make_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\.venv\Lib\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/tmy?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 152, in tmy
+    return PVGISService._make_request("tmy", params)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 60, in _make_request
+    raise RuntimeError(f"HTTP error from PVGIS API: {str(e)}") from e
+RuntimeError: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/tmy?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\routers\pvgis_router.py", line 202, in typical_meteorological_year
+    result = PVGISService.tmy(request)
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 155, in tmy
+    raise RuntimeError(f"Error in TMY: {str(e)}") from e
+RuntimeError: Error in TMY: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/tmy?lat=-90.0&lon=-180.0&raddatabase=PVGIS-SARAH3&startyear=2005&endyear=2005&usehorizon=1&userhorizon=string&outputformat=json&browser=0
+2025-11-11 23:24:09 [INFO] app_logger, pvgis_router.py: TMY request for (38.447, 27.149), years=2005-2020
+2025-11-11 23:24:09 [INFO] app_logger, pvgis.py: Requesting PVGIS tmy with params: {'lat': 38.447, 'lon': 27.149, 'startyear': 2005, 'endyear': 2020, 'usehorizon': 1, 'outputformat': 'json', 'browser': 0}
+2025-11-11 23:24:12 [INFO] app_logger, pvgis_router.py: TMY completed successfully
+2025-11-11 23:24:47 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:24:47 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:24:58 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:24:58 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:25:43 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-11 23:25:43 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-11 23:25:58 [INFO] app_logger, pvgis_router.py: Horizon request for (38.447, 27.149)
+2025-11-11 23:25:58 [INFO] app_logger, pvgis.py: Requesting PVGIS printhorizon with params: {'lat': 38.447, 'lon': 27.149, 'outputformat': 'json', 'browser': 0}
+2025-11-11 23:25:59 [INFO] app_logger, pvgis_router.py: Horizon completed successfully
+2025-11-11 23:26:06 [INFO] app_logger, pvgis_router.py: Horizon request for (-90.0, -180.0)
+2025-11-11 23:26:06 [INFO] app_logger, pvgis.py: Requesting PVGIS printhorizon with params: {'lat': -90.0, 'lon': -180.0, 'userhorizon': 'string', 'outputformat': 'json', 'browser': 0}
+2025-11-11 23:26:07 [ERROR] app_logger, pvgis_router.py: Runtime error in Horizon: Error in printhorizon: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 41, in _make_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\.venv\Lib\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 166, in printhorizon
+    return PVGISService._make_request("printhorizon", params)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 60, in _make_request
+    raise RuntimeError(f"HTTP error from PVGIS API: {str(e)}") from e
+RuntimeError: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\routers\pvgis_router.py", line 237, in horizon_profile
+    result = PVGISService.printhorizon(request)
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 169, in printhorizon
+    raise RuntimeError(f"Error in printhorizon: {str(e)}") from e
+RuntimeError: Error in printhorizon: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+2025-11-11 23:26:21 [INFO] app_logger, pvgis_router.py: Horizon request for (-90.0, -180.0)
+2025-11-11 23:26:21 [INFO] app_logger, pvgis.py: Requesting PVGIS printhorizon with params: {'lat': -90.0, 'lon': -180.0, 'userhorizon': 'string', 'outputformat': 'json', 'browser': 0}
+2025-11-11 23:26:22 [ERROR] app_logger, pvgis_router.py: Runtime error in Horizon: Error in printhorizon: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 41, in _make_request
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\.venv\Lib\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 166, in printhorizon
+    return PVGISService._make_request("printhorizon", params)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 60, in _make_request
+    raise RuntimeError(f"HTTP error from PVGIS API: {str(e)}") from e
+RuntimeError: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\routers\pvgis_router.py", line 237, in horizon_profile
+    result = PVGISService.printhorizon(request)
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis.py", line 169, in printhorizon
+    raise RuntimeError(f"Error in printhorizon: {str(e)}") from e
+RuntimeError: Error in printhorizon: HTTP error from PVGIS API: 400 Client Error: BAD REQUEST for url: https://re.jrc.ec.europa.eu/api/v5_2/printhorizon?lat=-90.0&lon=-180.0&userhorizon=string&outputformat=json&browser=0
+2025-11-11 23:26:27 [INFO] app_logger, pvgis_router.py: Horizon request for (38.447, 27.149)
+2025-11-11 23:26:27 [INFO] app_logger, pvgis.py: Requesting PVGIS printhorizon with params: {'lat': 38.447, 'lon': 27.149, 'outputformat': 'json', 'browser': 0}
+2025-11-11 23:26:28 [INFO] app_logger, pvgis_router.py: Horizon completed successfully
