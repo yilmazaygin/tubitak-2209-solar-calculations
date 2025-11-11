@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     DECIMAL_PRECISION: int = Field(default=10, description="Default precision for Decimal calculations")
     YEAR_LIMIT_START: int = Field(default=1900, description="Minimum valid year for date inputs")
     YEAR_LIMIT_END: int = Field(default=2100, description="Maximum valid year for date inputs")
-    
+    MAX_RECORDS_PER_ARRAY: int = Field(default=500, description="Max records per array in API responses to prevent client issues")
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
