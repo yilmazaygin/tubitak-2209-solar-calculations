@@ -34,24 +34,33 @@ class PVGISPlusService:
             
             logger.info(f"Filtering data for month={request.month}, day={request.day}")
             
+            # Debug: Log first few timestamps to see format
+            if hourly_data:
+                logger.info(f"Total records received: {len(hourly_data)}")
+                logger.info(f"Sample timestamps: {[record.get('time', '') for record in hourly_data[:5]]}")
+            
             for record in hourly_data:
                 timestamp = record.get("time", "")
-                # Format: YYYYMMDD:HHMM
-                if len(timestamp) >= 8:
-                    date_part = timestamp[4:8]  # MMDD
-                    year = int(timestamp[:4])
-                    
-                    if date_part == target_date:
-                        hour = int(timestamp[9:11])  # Extract HH from :HHMM
-                        years_found.add(year)
+                # Format: YYYYMMDD:HHMM (e.g., "20100415:1300")
+                if len(timestamp) >= 13:  # Need at least YYYYMMDD:HHMM
+                    try:
+                        date_part = timestamp[4:8]  # MMDD
+                        year = int(timestamp[:4])
                         
-                        hourly_groups[hour].append({
-                            "G_i": record.get("G(i)", 0.0),
-                            "H_sun": record.get("H_sun", 0.0),
-                            "T2m": record.get("T2m", 0.0),
-                            "WS10m": record.get("WS10m", 0.0),
-                            "Int": record.get("Int", 0.0)
-                        })
+                        if date_part == target_date:
+                            hour = int(timestamp[9:11])  # Extract HH from :HHMM
+                            years_found.add(year)
+                        
+                            hourly_groups[hour].append({
+                                "G_i": record.get("G(i)", 0.0),
+                                "H_sun": record.get("H_sun", 0.0),
+                                "T2m": record.get("T2m", 0.0),
+                                "WS10m": record.get("WS10m", 0.0),
+                                "Int": record.get("Int", 0.0)
+                            })
+                    except (ValueError, IndexError) as e:
+                        logger.warning(f"Failed to parse timestamp '{timestamp}': {e}")
+                        continue
             
             if not hourly_groups:
                 raise ValueError(

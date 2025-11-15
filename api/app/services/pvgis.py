@@ -14,7 +14,7 @@ class PVGISService:
     TIMEOUT = 30
     
     @staticmethod
-    def _make_request(endpoint: str, params: Dict[str, Any], use_v53: bool = False) -> Dict:
+    def _make_request(endpoint: str, params: Dict[str, Any], use_v53: bool = False, truncate_response: bool = True) -> Dict:
         """
         Make HTTP request to PVGIS API with error handling.
         
@@ -22,6 +22,7 @@ class PVGISService:
             endpoint: API endpoint name (e.g., 'PVcalc', 'seriescalc')
             params: Query parameters
             use_v53: Use PVGIS 5.3 instead of 5.2
+            truncate_response: Whether to truncate large arrays for client compatibility
         
         Returns:
             Parsed JSON response
@@ -73,7 +74,8 @@ class PVGISService:
                         logger.info(f"  - {key}: {len(value)} records")
             
             # Truncate large arrays for client compatibility (uses MAX_RECORDS_PER_ARRAY from config)
-            data = truncate_large_arrays(data)
+            if truncate_response:
+                data = truncate_large_arrays(data)
             
             return data
             
@@ -228,7 +230,8 @@ class PVGISService:
             
             logger.info(f"Fetching PVGIS data for lat={request.latitude}, lon={request.longitude}")
             
-            data = PVGISService._make_request("seriescalc", params)
+            # Don't truncate response since we need all data for internal processing
+            data = PVGISService._make_request("seriescalc", params, truncate_response=False)
             
             # Extract metadata
             inputs = data.get("inputs", {})

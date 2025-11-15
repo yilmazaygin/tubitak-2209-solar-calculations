@@ -1,0 +1,341 @@
+{
+  "julian_day_basic": {
+    "description": "Calculate Julian Date for a specific date and time",
+    "endpoint": "/utils/julian-day",
+    "request": {
+      "year": 2025,
+      "month": 4,
+      "day": 15,
+      "hour": 12,
+      "minute": 30,
+      "second": 0
+    },
+    "expected_result": "JD around 2460047.02"
+  },
+  
+  "julian_day_midnight": {
+    "description": "Julian Date at midnight (default time values)",
+    "endpoint": "/utils/julian-day",
+    "request": {
+      "year": 2025,
+      "month": 1,
+      "day": 1,
+      "hour": 0,
+      "minute": 0,
+      "second": 0
+    }
+  },
+  
+  "julian_day_summer_solstice": {
+    "description": "Julian Date for summer solstice 2025",
+    "endpoint": "/utils/julian-day",
+    "request": {
+      "year": 2025,
+      "month": 6,
+      "day": 21,
+      "hour": 12,
+      "minute": 0,
+      "second": 0
+    }
+  },
+  
+  "julian_day_winter_solstice": {
+    "description": "Julian Date for winter solstice 2025",
+    "endpoint": "/utils/julian-day",
+    "request": {
+      "year": 2025,
+      "month": 12,
+      "day": 21,
+      "hour": 12,
+      "minute": 0,
+      "second": 0
+    }
+  },
+  
+  "pressure_sea_level": {
+    "description": "Standard atmosphere at sea level (should be nearly unchanged)",
+    "endpoint": "/utils/pressure",
+    "request": {
+      "sea_level_pressure": 1013.25,
+      "elevation": 0
+    },
+    "expected_result": "Station pressure ~1013.25 mbar"
+  },
+  
+  "pressure_500m": {
+    "description": "Station pressure at 500m elevation (Izmir elevation)",
+    "endpoint": "/utils/pressure",
+    "request": {
+      "sea_level_pressure": 1013.25,
+      "elevation": 500
+    },
+    "expected_result": "Station pressure ~954 mbar"
+  },
+  
+  "pressure_1000m": {
+    "description": "Station pressure at 1000m elevation",
+    "endpoint": "/utils/pressure",
+    "request": {
+      "sea_level_pressure": 1013.25,
+      "elevation": 1000
+    },
+    "expected_result": "Station pressure ~899 mbar"
+  },
+  
+  "pressure_2000m": {
+    "description": "Station pressure at 2000m elevation (high altitude)",
+    "endpoint": "/utils/pressure",
+    "request": {
+      "sea_level_pressure": 1013.25,
+      "elevation": 2000
+    },
+    "expected_result": "Station pressure ~795 mbar"
+  },
+  
+  "pressure_ankara": {
+    "description": "Ankara elevation (~850m) with typical pressure",
+    "endpoint": "/utils/pressure",
+    "request": {
+      "sea_level_pressure": 1015.0,
+      "elevation": 850
+    }
+  },
+  
+  "solar_position_izmir_noon": {
+    "description": "Solar position at Izmir at noon on summer solstice",
+    "endpoint": "/utils/solar-position",
+    "request": {
+      "year": 2025,
+      "month": 6,
+      "day": 21,
+      "hour": 12,
+      "minute": 0,
+      "second": 0,
+      "latitude": 38.447,
+      "longitude": 27.149
+    },
+    "expected_result": "High solar elevation (sun nearly overhead in summer)"
+  },
+  
+  "solar_position_izmir_winter": {
+    "description": "Solar position at Izmir at noon on winter solstice",
+    "endpoint": "/utils/solar-position",
+    "request": {
+      "year": 2025,
+      "month": 12,
+      "day": 21,
+      "hour": 12,
+      "minute": 0,
+      "second": 0,
+      "latitude": 38.447,
+      "longitude": 27.149
+    },
+    "expected_result": "Lower solar elevation (sun lower in sky during winter)"
+  },
+  
+  "solar_position_sunrise_approx": {
+    "description": "Solar position near sunrise (around 5-6 AM UTC in summer)",
+    "endpoint": "/utils/solar-position",
+    "request": {
+      "year": 2025,
+      "month": 6,
+      "day": 21,
+      "hour": 3,
+      "minute": 30,
+      "second": 0,
+      "latitude": 38.447,
+      "longitude": 27.149
+    },
+    "expected_result": "Low or negative elevation (near horizon)"
+  },
+  
+  "solar_position_sunset_approx": {
+    "description": "Solar position near sunset (around 7-8 PM UTC in summer)",
+    "endpoint": "/utils/solar-position",
+    "request": {
+      "year": 2025,
+      "month": 6,
+      "day": 21,
+      "hour": 18,
+      "minute": 0,
+      "second": 0,
+      "latitude": 38.447,
+      "longitude": 27.149
+    },
+    "expected_result": "Low or negative elevation (near horizon)"
+  },
+  
+  "solar_position_ankara": {
+    "description": "Solar position at Ankara at noon",
+    "endpoint": "/utils/solar-position",
+    "request": {
+      "year": 2025,
+      "month": 6,
+      "day": 21,
+      "hour": 12,
+      "minute": 0,
+      "second": 0,
+      "latitude": 39.9334,
+      "longitude": 32.8597
+    }
+  },
+  
+  "solar_position_istanbul": {
+    "description": "Solar position at Istanbul at noon",
+    "endpoint": "/utils/solar-position",
+    "request": {
+      "year": 2025,
+      "month": 6,
+      "day": 21,
+      "hour": 12,
+      "minute": 0,
+      "second": 0,
+      "latitude": 41.0082,
+      "longitude": 28.9784
+    }
+  },
+  
+  "solar_position_with_julian": {
+    "description": "Solar position using pre-calculated Julian Date",
+    "endpoint": "/utils/solar-position",
+    "request": {
+      "year": 2000,
+      "month": 1,
+      "day": 1,
+      "hour": 0,
+      "minute": 0,
+      "second": 0,
+      "latitude": 38.447,
+      "longitude": 27.149,
+      "julian_date": 2451544.5
+    },
+    "note": "When julian_date is provided, date fields are ignored"
+  },
+  
+  "batch_full_day": {
+    "description": "Solar position for every hour of summer solstice",
+    "endpoint": "/utils/solar-position/batch",
+    "request": {
+      "latitude": 38.447,
+      "longitude": 27.149,
+      "year": 2025,
+      "month": 6,
+      "day": 21,
+      "hour_start": 0,
+      "hour_end": 23,
+      "hour_step": 1
+    },
+    "expected_result": "24 hourly positions showing sun path from sunrise to sunset"
+  },
+  
+  "batch_daylight_hours": {
+    "description": "Solar position for daylight hours only (6 AM to 8 PM)",
+    "endpoint": "/utils/solar-position/batch",
+    "request": {
+      "latitude": 38.447,
+      "longitude": 27.149,
+      "year": 2025,
+      "month": 6,
+      "day": 21,
+      "hour_start": 3,
+      "hour_end": 20,
+      "hour_step": 1
+    }
+  },
+  
+  "batch_two_hour_intervals": {
+    "description": "Solar position every 2 hours",
+    "endpoint": "/utils/solar-position/batch",
+    "request": {
+      "latitude": 38.447,
+      "longitude": 27.149,
+      "year": 2025,
+      "month": 4,
+      "day": 15,
+      "hour_start": 0,
+      "hour_end": 23,
+      "hour_step": 2
+    },
+    "expected_result": "12 positions (0, 2, 4, ..., 22)"
+  },
+  
+  "batch_winter_day": {
+    "description": "Solar position for winter solstice (shorter day)",
+    "endpoint": "/utils/solar-position/batch",
+    "request": {
+      "latitude": 38.447,
+      "longitude": 27.149,
+      "year": 2025,
+      "month": 12,
+      "day": 21,
+      "hour_start": 0,
+      "hour_end": 23,
+      "hour_step": 1
+    },
+    "expected_result": "Shows lower sun angles and shorter daylight period"
+  },
+  
+  "additional_locations": {
+    "ankara": {
+      "latitude": 39.9334,
+      "longitude": 32.8597,
+      "elevation": 850,
+      "description": "Ankara, Turkey"
+    },
+    "istanbul": {
+      "latitude": 41.0082,
+      "longitude": 28.9784,
+      "elevation": 100,
+      "description": "Istanbul, Turkey"
+    },
+    "izmir": {
+      "latitude": 38.447,
+      "longitude": 27.149,
+      "elevation": 25,
+      "description": "Izmir, Turkey"
+    },
+    "antalya": {
+      "latitude": 36.8969,
+      "longitude": 30.7133,
+      "elevation": 50,
+      "description": "Antalya, Turkey"
+    }
+  },
+  
+  "notes": {
+    "julian_day": [
+      "Julian Date is continuous count of days since Jan 1, 4713 BC noon UTC",
+      "Essential for astronomical calculations and solar position",
+      "Valid from 1582 onwards (Gregorian calendar)",
+      "Time is in UTC - convert local time before calling"
+    ],
+    "pressure": [
+      "Atmospheric pressure decreases ~12% per 1000m elevation",
+      "Important for accurate solar irradiance calculations",
+      "Formula: P = P_sea * exp(-0.119*H - 0.0013*H²) where H is in km",
+      "Standard sea level pressure: 1013.25 mbar (1 atm)"
+    ],
+    "solar_position": [
+      "Zenith angle: 0° = sun directly overhead, 90° = horizon",
+      "Elevation angle: 90° = directly overhead, 0° = horizon, negative = below horizon",
+      "Relationship: elevation = 90° - zenith",
+      "Earth-Sun distance varies ±3% throughout year (affects solar intensity)",
+      "All times must be in UTC",
+      "Negative elevation means sun is below horizon (nighttime)"
+    ],
+    "batch_calculation": [
+      "Efficiently calculates multiple hours in single request",
+      "Use for sun path diagrams and daily analysis",
+      "Returns all calculations even if sun is below horizon",
+      "Hour_step allows skipping hours (e.g., every 2 hours)"
+    ],
+    "use_cases": [
+      "PV system design and optimization",
+      "Solar tracking system control",
+      "Shading analysis",
+      "Energy yield prediction",
+      "Daylighting studies",
+      "Agricultural planning"
+    ]
+  }
+}

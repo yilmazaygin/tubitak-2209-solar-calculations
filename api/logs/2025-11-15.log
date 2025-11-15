@@ -1,0 +1,250 @@
+2025-11-15 14:26:14 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 14:26:14 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 14:26:53 [INFO] app_logger, calculator_router.py: Bird model calculation for (40.0, -75.0), 2007-06-21
+2025-11-15 14:26:53 [INFO] app_logger, birdmodel.py: Starting Bird model calculation for (40.0, -75.0) on 2007-06-21 17:00
+2025-11-15 14:26:53 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2007-06-21 17:00:00
+2025-11-15 14:26:53 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2454273.2083333335
+2025-11-15 14:26:53 [DEBUG] app_logger, pressure.py: Calculating station pressure: sea_level=1012.0mbar, elevation=120.0m
+2025-11-15 14:26:53 [DEBUG] app_logger, pressure.py: Station pressure calculated: 997.63mbar
+2025-11-15 14:26:53 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2454273.2083333335, lon=-75.0, lat=40.0
+2025-11-15 14:26:53 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=16.57°, distance=1.016257AU
+2025-11-15 14:26:53 [DEBUG] app_logger, birdmodel.py: Initial calculations: JD=2454273.21, pressure=997.63mbar, zenith=16.57°
+2025-11-15 14:26:53 [DEBUG] app_logger, birdmodel.py: Air mass: AM=1.0426, AMp=1.0268
+2025-11-15 14:26:53 [DEBUG] app_logger, birdmodel.py: Atmospheric transmittances: Rayleigh=0.9118, Ozone=0.9833, MixedGas=0.9873, Water=0.8967, Aerosol=0.9043
+2025-11-15 14:26:53 [INFO] app_logger, birdmodel.py: Bird model completed: Direct=879.87 W/m², Diffuse=121.72 W/m², Total=1001.59 W/m²
+2025-11-15 14:26:53 [DEBUG] app_logger, calculator_router.py: Bird model outputs: {'julian_date': 2454273.2083333335, 'station_pressure': 997.6326574509542, 'earth_sun_distance': 1.0162566144611185, 'zenith_angle': 16.56588057919042, 'air_mass': 1.0425933103868987, 'corrected_solar_constant': 1323.6151944453154, 'direct_horizontal': 879.8700701583065, 'diffuse_horizontal': 121.7201549335939, 'total_horizontal': 1001.5902250919004}
+2025-11-15 14:30:44 [INFO] app_logger, pvgis_router.py: Horizon request for (38.447, 27.149)
+2025-11-15 14:30:44 [INFO] app_logger, pvgis.py: Requesting PVGIS printhorizon with params: {'lat': 38.447, 'lon': 27.149, 'outputformat': 'json', 'browser': '0'}
+2025-11-15 14:30:46 [INFO] app_logger, pvgis.py: PVGIS response status: 200, content-type: application/json
+2025-11-15 14:30:46 [INFO] app_logger, pvgis.py: PVGIS printhorizon response received successfully. Keys: ['inputs', 'outputs', 'meta']
+2025-11-15 14:30:46 [INFO] app_logger, pvgis.py: Response outputs keys: ['horizon_profile', 'winter_solstice', 'summer_solstice']
+2025-11-15 14:30:46 [INFO] app_logger, pvgis.py:   - horizon_profile: 49 records
+2025-11-15 14:30:46 [INFO] app_logger, pvgis.py:   - winter_solstice: 49 records
+2025-11-15 14:30:46 [INFO] app_logger, pvgis.py:   - summer_solstice: 49 records
+2025-11-15 14:30:46 [INFO] app_logger, pvgis_router.py: Horizon completed successfully
+2025-11-15 14:31:48 [INFO] app_logger, pvgis_plus_router.py: Calculating day average for 04/15 at (38.447, 27.149)
+2025-11-15 14:31:48 [INFO] app_logger, pvgis.py: Fetching PVGIS data for lat=38.447, lon=27.149
+2025-11-15 14:31:48 [INFO] app_logger, pvgis.py: Requesting PVGIS seriescalc with params: {'lat': 38.447, 'lon': 27.149, 'startyear': 2005, 'endyear': 2020, 'angle': 90, 'aspect': 0, 'outputformat': 'json', 'browser': '0'}
+2025-11-15 14:31:55 [INFO] app_logger, pvgis.py: PVGIS response status: 200, content-type: application/json
+2025-11-15 14:31:55 [INFO] app_logger, pvgis.py: PVGIS seriescalc response received successfully. Keys: ['inputs', 'outputs', 'meta']
+2025-11-15 14:31:55 [INFO] app_logger, pvgis.py: Response outputs keys: ['hourly']
+2025-11-15 14:31:55 [INFO] app_logger, pvgis.py:   - hourly: 140256 records
+2025-11-15 14:31:55 [WARNING] app_logger, response_utils.py: Truncated outputs.hourly from 140256 to 500 records for client compatibility
+2025-11-15 14:31:55 [INFO] app_logger, pvgis.py: Successfully fetched 500 hourly records
+2025-11-15 14:31:55 [INFO] app_logger, pvgis_plus.py: Filtering data for month=4, day=15
+2025-11-15 14:31:55 [ERROR] app_logger, pvgis_plus_router.py: Runtime error in PVGIS day average: Data processing error: No data found for 04/15 in years 2005-2020
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis_plus.py", line 57, in calculate_day_average
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: No data found for 04/15 in years 2005-2020
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\routers\pvgis_plus_router.py", line 40, in get_day_average
+    result = PVGISPlusService.calculate_day_average(request)
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis_plus.py", line 120, in calculate_day_average
+    raise RuntimeError(f"Data processing error: {str(e)}") from e
+RuntimeError: Data processing error: No data found for 04/15 in years 2005-2020
+2025-11-15 14:32:25 [INFO] app_logger, pvgis_plus_router.py: Calculating day average for 04/15 at (38.447, 27.149)
+2025-11-15 14:32:25 [INFO] app_logger, pvgis.py: Fetching PVGIS data for lat=38.447, lon=27.149
+2025-11-15 14:32:25 [INFO] app_logger, pvgis.py: Requesting PVGIS seriescalc with params: {'lat': 38.447, 'lon': 27.149, 'startyear': 2010, 'endyear': 2020, 'angle': 90, 'aspect': 0, 'outputformat': 'json', 'browser': '0'}
+2025-11-15 14:32:31 [INFO] app_logger, pvgis.py: PVGIS response status: 200, content-type: application/json
+2025-11-15 14:32:31 [INFO] app_logger, pvgis.py: PVGIS seriescalc response received successfully. Keys: ['inputs', 'outputs', 'meta']
+2025-11-15 14:32:31 [INFO] app_logger, pvgis.py: Response outputs keys: ['hourly']
+2025-11-15 14:32:31 [INFO] app_logger, pvgis.py:   - hourly: 96432 records
+2025-11-15 14:32:31 [WARNING] app_logger, response_utils.py: Truncated outputs.hourly from 96432 to 500 records for client compatibility
+2025-11-15 14:32:31 [INFO] app_logger, pvgis.py: Successfully fetched 500 hourly records
+2025-11-15 14:32:31 [INFO] app_logger, pvgis_plus.py: Filtering data for month=4, day=15
+2025-11-15 14:32:31 [ERROR] app_logger, pvgis_plus_router.py: Runtime error in PVGIS day average: Data processing error: No data found for 04/15 in years 2010-2020
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis_plus.py", line 57, in calculate_day_average
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: No data found for 04/15 in years 2010-2020
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\routers\pvgis_plus_router.py", line 40, in get_day_average
+    result = PVGISPlusService.calculate_day_average(request)
+  File "C:\Yilmaz\Projects\tubitak-gunes\api\app\services\pvgis_plus.py", line 120, in calculate_day_average
+    raise RuntimeError(f"Data processing error: {str(e)}") from e
+RuntimeError: Data processing error: No data found for 04/15 in years 2010-2020
+2025-11-15 14:34:22 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 14:34:22 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 14:34:41 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 14:34:41 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 14:34:52 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 14:34:52 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 14:34:59 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 14:34:59 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 14:35:07 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 14:35:07 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 14:35:21 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 14:35:21 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 14:35:33 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 14:35:33 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 14:35:59 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 14:35:59 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 14:36:06 [INFO] app_logger, pvgis_plus_router.py: Calculating day average for 04/15 at (38.447, 27.149)
+2025-11-15 14:36:06 [INFO] app_logger, pvgis.py: Fetching PVGIS data for lat=38.447, lon=27.149
+2025-11-15 14:36:06 [INFO] app_logger, pvgis.py: Requesting PVGIS seriescalc with params: {'lat': 38.447, 'lon': 27.149, 'startyear': 2005, 'endyear': 2020, 'angle': 90, 'aspect': 0, 'outputformat': 'json', 'browser': '0'}
+2025-11-15 14:36:16 [INFO] app_logger, pvgis.py: PVGIS response status: 200, content-type: application/json
+2025-11-15 14:36:17 [INFO] app_logger, pvgis.py: PVGIS seriescalc response received successfully. Keys: ['inputs', 'outputs', 'meta']
+2025-11-15 14:36:17 [INFO] app_logger, pvgis.py: Response outputs keys: ['hourly']
+2025-11-15 14:36:17 [INFO] app_logger, pvgis.py:   - hourly: 140256 records
+2025-11-15 14:36:17 [INFO] app_logger, pvgis.py: Successfully fetched 140256 hourly records
+2025-11-15 14:36:17 [INFO] app_logger, pvgis_plus.py: Filtering data for month=4, day=15
+2025-11-15 14:36:17 [INFO] app_logger, pvgis_plus.py: Total records received: 140256
+2025-11-15 14:36:17 [INFO] app_logger, pvgis_plus.py: Sample timestamps: ['20050101:0010', '20050101:0110', '20050101:0210', '20050101:0310', '20050101:0410']
+2025-11-15 14:36:17 [INFO] app_logger, pvgis_plus.py: Found data for 16 years: [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
+2025-11-15 14:36:17 [INFO] app_logger, pvgis_plus.py: Calculated averages: peak at hour 10 with 499.75 W/m², daily total: 3577.55 Wh/m²
+2025-11-15 14:36:17 [INFO] app_logger, pvgis_plus_router.py: Successfully calculated averages for 16 years. Peak: 499.75 W/m² at hour 10
+2025-11-15 15:55:03 [INFO] app_logger, pvgis_plus_router.py: Calculating day average for 04/15 at (38.447, 27.149)
+2025-11-15 15:55:03 [INFO] app_logger, pvgis.py: Fetching PVGIS data for lat=38.447, lon=27.149
+2025-11-15 15:55:03 [INFO] app_logger, pvgis.py: Requesting PVGIS seriescalc with params: {'lat': 38.447, 'lon': 27.149, 'startyear': 2005, 'endyear': 2020, 'angle': 90, 'aspect': 0, 'outputformat': 'json', 'browser': '0'}
+2025-11-15 15:55:12 [INFO] app_logger, pvgis.py: PVGIS response status: 200, content-type: application/json
+2025-11-15 15:55:12 [INFO] app_logger, pvgis.py: PVGIS seriescalc response received successfully. Keys: ['inputs', 'outputs', 'meta']
+2025-11-15 15:55:12 [INFO] app_logger, pvgis.py: Response outputs keys: ['hourly']
+2025-11-15 15:55:12 [INFO] app_logger, pvgis.py:   - hourly: 140256 records
+2025-11-15 15:55:12 [INFO] app_logger, pvgis.py: Successfully fetched 140256 hourly records
+2025-11-15 15:55:12 [INFO] app_logger, pvgis_plus.py: Filtering data for month=4, day=15
+2025-11-15 15:55:12 [INFO] app_logger, pvgis_plus.py: Total records received: 140256
+2025-11-15 15:55:12 [INFO] app_logger, pvgis_plus.py: Sample timestamps: ['20050101:0010', '20050101:0110', '20050101:0210', '20050101:0310', '20050101:0410']
+2025-11-15 15:55:13 [INFO] app_logger, pvgis_plus.py: Found data for 16 years: [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
+2025-11-15 15:55:13 [INFO] app_logger, pvgis_plus.py: Calculated averages: peak at hour 10 with 499.75 W/m², daily total: 3577.55 Wh/m²
+2025-11-15 15:55:13 [INFO] app_logger, pvgis_plus_router.py: Successfully calculated averages for 16 years. Peak: 499.75 W/m² at hour 10
+2025-11-15 15:57:51 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 15:57:51 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 15:57:58 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 15:57:58 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 15:58:10 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 15:58:10 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 15:59:16 [INFO] app_logger, logger.py: Logger initialized.
+2025-11-15 15:59:16 [INFO] app_logger, config_loader.py: Configuration loaded from C:\Yilmaz\Projects\tubitak-gunes\.env
+2025-11-15 15:59:29 [INFO] app_logger, utils_router.py: Calculating Julian Date for 2025-04-15 12:30:00
+2025-11-15 15:59:29 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-04-15 12:30:00
+2025-11-15 15:59:29 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460781.0208333335
+2025-11-15 15:59:29 [INFO] app_logger, utils_router.py: Julian Date calculated: 2460781.0208333335
+2025-11-15 15:59:39 [INFO] app_logger, utils_router.py: Calculating Julian Date for 2025-04-15 12:30:00
+2025-11-15 15:59:39 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-04-15 12:30:00
+2025-11-15 15:59:39 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460781.0208333335
+2025-11-15 15:59:39 [INFO] app_logger, utils_router.py: Julian Date calculated: 2460781.0208333335
+2025-11-15 15:59:49 [INFO] app_logger, utils_router.py: Calculating station pressure: sea_level=1013.25mbar, elevation=500.0m
+2025-11-15 15:59:49 [DEBUG] app_logger, pressure.py: Calculating station pressure: sea_level=1013.25mbar, elevation=500.0m
+2025-11-15 15:59:49 [DEBUG] app_logger, pressure.py: Station pressure calculated: 954.41mbar
+2025-11-15 15:59:49 [INFO] app_logger, utils_router.py: Station pressure calculated: 954.41mbar (drop: 58.84mbar, ratio: 0.9419)
+2025-11-15 16:00:38 [INFO] app_logger, utils_router.py: Calculating solar position at (38.447, 27.149) for 2025-06-21 12:00:00
+2025-11-15 16:00:38 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 12:00:00
+2025-11-15 16:00:38 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.0
+2025-11-15 16:00:38 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.0, lon=27.149, lat=38.447
+2025-11-15 16:00:38 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=27.20°, distance=1.016257AU
+2025-11-15 16:00:38 [INFO] app_logger, utils_router.py: Solar position calculated: zenith=27.20°, elevation=62.80°, distance=1.016257AU
+2025-11-15 16:01:10 [INFO] app_logger, utils_router.py: Batch solar position calculation at (38.447, 27.149) for 2025-06-21, hours 0-23 (step: 1)
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 00:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.5
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.5, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=113.24°, distance=1.016224AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 01:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.5416666665
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.5416666665, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=106.81°, distance=1.016227AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 02:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.5833333335
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.5833333335, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=98.47°, distance=1.016230AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 03:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.625
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.625, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=88.76°, distance=1.016232AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 04:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.6666666665
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.6666666665, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=78.12°, distance=1.016235AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 05:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.7083333335
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.7083333335, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=66.87°, distance=1.016238AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 06:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.75
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.75, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=55.25°, distance=1.016241AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 07:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.7916666665
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.7916666665, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=43.52°, distance=1.016243AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 08:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.8333333335
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.8333333335, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=32.03°, distance=1.016246AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 09:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.875
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.875, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=21.65°, distance=1.016249AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 10:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.9166666665
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.9166666665, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=15.28°, distance=1.016252AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 11:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460847.9583333335
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460847.9583333335, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=18.01°, distance=1.016254AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 12:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.0
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.0, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=27.20°, distance=1.016257AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 13:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.0416666665
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.0416666665, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=38.37°, distance=1.016260AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 14:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.0833333335
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.0833333335, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=50.05°, distance=1.016262AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 15:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.125
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.125, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=61.75°, distance=1.016265AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 16:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.1666666665
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.1666666665, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=73.20°, distance=1.016268AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 17:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.2083333335
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.2083333335, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=84.14°, distance=1.016270AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 18:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.25
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.25, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=94.31°, distance=1.016273AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 19:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.2916666665
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.2916666665, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=103.32°, distance=1.016276AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 20:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.3333333335
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.3333333335, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=110.67°, distance=1.016278AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 21:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.375
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.375, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=115.77°, distance=1.016281AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 22:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.4166666665
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.4166666665, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=118.04°, distance=1.016283AU
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 23:00:00
+2025-11-15 16:01:10 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.4583333335
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.4583333335, lon=27.149, lat=38.447
+2025-11-15 16:01:10 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=117.16°, distance=1.016286AU
+2025-11-15 16:01:10 [INFO] app_logger, utils_router.py: Batch calculation completed: 24 positions calculated
+2025-11-15 16:02:20 [INFO] app_logger, utils_router.py: Calculating solar position at (38.447, 27.149) for 2025-06-21 12:00:00
+2025-11-15 16:02:20 [DEBUG] app_logger, julianday.py: Calculating Julian Date for 2025-06-21 12:00:00
+2025-11-15 16:02:20 [DEBUG] app_logger, julianday.py: Julian Date calculated: 2460848.0
+2025-11-15 16:02:20 [DEBUG] app_logger, solar_position.py: Calculating solar position: JD=2460848.0, lon=27.149, lat=38.447
+2025-11-15 16:02:20 [DEBUG] app_logger, solar_position.py: Solar position calculated: zenith=27.20°, distance=1.016257AU
+2025-11-15 16:02:20 [INFO] app_logger, utils_router.py: Solar position calculated: zenith=27.20°, elevation=62.80°, distance=1.016257AU
